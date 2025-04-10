@@ -2,8 +2,10 @@
 streamlit
 openai
 python-dotenv
-diffusers==0.10.2
+diffusers
+huggingface_hub
 transformers 
 scipy 
 ftfy 
 accelerate
+
