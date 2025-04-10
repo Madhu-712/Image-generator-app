@@ -14,28 +14,15 @@ import torch
 
 load_dotenv()
 
-@st.cache_resource  # Cache the pipeline to avoid repeated loading
-def load_pipeline():
-    with torch.no_grad():
-        pipe = StableDiffusionPipeline.from_pretrained("runwayml/stable-diffusion-v1-5", torch_dtype=torch.float16)
-        pipe = pipe.to("cuda") if torch.cuda.is_available() else pipe.to("cpu")
-        return pipe
-
-pipe = load_pipeline()
-
-prompt = st.text_input("Enter your prompt:")
-if prompt:
-    with st.spinner("Generating image..."):
-        image = pipe(prompt).images[0]
-        st.image(image)
 
 
-#def generate_images_using_huggingface_diffusers(text):
-    #pipe = StableDiffusionPipeline.from_pretrained("runwayml/stable-diffusion-v1-5", torch_dtype=torch.float16)
-   # pipe = pipe.to("cuda")
-    #prompt = text
-    #image = pipe(prompt).images[0] 
-    #return image
+
+def generate_images_using_huggingface_diffusers(text):
+    pipe = StableDiffusionPipeline.from_pretrained("runwayml/stable-diffusion-v1-5", torch_dtype=torch.float16)
+    pipe = pipe.to("cuda")
+    prompt = text
+    image = pipe(prompt).images[0] 
+    return image
 
 # streamlit app
 
